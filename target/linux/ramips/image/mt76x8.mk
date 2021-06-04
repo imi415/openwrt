@@ -171,6 +171,14 @@ define Device/hilink_hlk-7688a
 endef
 TARGET_DEVICES += hilink_hlk-7688a
 
+define Device/hilink_hlk-7688a-hitb
+  IMAGE_SIZE := 32448k
+  DEVICE_VENDOR := Hi-Link
+  DEVICE_MODEL := HLK-7688A-HITB
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-usb-ledtrig-usbport kmod-sdhci-mt7620
+endef
+TARGET_DEVICES += hilink_hlk-7688a-hitb
+
 define Device/hiwifi_hc5661a
   IMAGE_SIZE := 15808k
   DEVICE_VENDOR := HiWiFi

@@ -1,0 +1,63 @@
+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+
+#include "mt7628an_hilink_hlk-7688a.dts"
+
+/ {
+	compatible = "hilink,hlk-7688a", "mediatek,mt7628an-soc";
+	model = "Hi-Link HLK-7688A-HITB";
+
+	keys {
+		compatible = "gpio-keys";
+
+		user {
+			label = "user";
+			gpios = <&gpio 37 GPIO_ACTIVE_LOW>;
+		};
+	};
+
+	leds {
+		compatible = "gpio-leds";
+
+		led_user_1_red: user_1_red {
+			label = "led1:red";
+			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
+		};
+
+		led_user_1_green: user_1_green {
+			label = "led1:green";
+			gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
+		};
+
+		led_user_2_red: user_2_red {
+			label = "led2:red";
+			gpios = <&gpio 40 GPIO_ACTIVE_LOW>;
+		};
+
+		led_user_2_green: user_2_green {
+			label = "led2:green";
+			gpios = <&gpio 20 GPIO_ACTIVE_LOW>;
+		};
+
+		led_user_3_red: user_3_red {
+			label = "led3:red";
+			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
+		};
+
+		led_user_3_green: user_3_green {
+			label = "led3:green";
+			gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
+		};
+	};
+};
+
+&state_default {
+	gpio {
+		groups = "wdt", "wled_an", "p2led_an", "p3led_an", "uart2", "refclk";
+		function = "gpio";
+	};
+};
+
+&sdhci {
+	status = "okay";
+};
+
