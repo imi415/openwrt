@@ -23,6 +23,10 @@ case "$FIRMWARE" in
 		ln -sf /lib/firmware/ath10k/pre-cal-pci-0000\:00\:00.0.bin \
 			/lib/firmware/ath10k/QCA9888/hw2.0/board.bin
 		;;
+	asus,rt-acrh17)
+		CI_UBIPART=UBI_DEV
+		caldata_extract_ubi "Factory" 0x9000 0x2f20
+		;;
 	avm,fritzrepeater-3000)
 		/usr/bin/fritz_cal_extract -i 1 -s 0x3D000 -e 0x212 -l 12064 -o /lib/firmware/$FIRMWARE $(find_mtd_chardev "urlader0") || \
 		/usr/bin/fritz_cal_extract -i 1 -s 0x3C800 -e 0x212 -l 12064 -o /lib/firmware/$FIRMWARE $(find_mtd_chardev "urlader0") || \
@@ -60,6 +64,8 @@ case "$FIRMWARE" in
 	glinet,gl-s1300 |\
 	linksys,ea6350v3 |\
 	mobipromo,cm520-79f |\
+	p2w,r619ac-128m |\
+	p2w,r619ac |\
 	qcom,ap-dk01.1-c1)
 		caldata_extract "ART" 0x1000 0x2f20
 		;;
@@ -72,6 +78,7 @@ case "$FIRMWARE" in
 	asus,map-ac2200)
 		caldata_extract_ubi "Factory" 0x1000 0x2f20
 		;;
+	asus,rt-acrh17|\
 	asus,rt-ac58u)
 		CI_UBIPART=UBI_DEV
 		caldata_extract_ubi "Factory" 0x1000 0x2f20
@@ -146,7 +153,8 @@ case "$FIRMWARE" in
 		( [ -d "$wlan_data" ] && caldata_sysfsload_from_file "$wlan_data/data_0" 0x0 0x2f20 )
 		;;
 	netgear,ex6100v2 |\
-	netgear,ex6150v2)
+	netgear,ex6150v2 |\
+	netgear,ex6200v2)
 		caldata_extract "ART" 0x1000 0x2f20
 		ath10k_patch_mac $(mtd_get_mac_binary dnidata 0x0)
 		;;
@@ -173,6 +181,8 @@ case "$FIRMWARE" in
 	glinet,gl-s1300 |\
 	linksys,ea6350v3 |\
 	mobipromo,cm520-79f |\
+	p2w,r619ac-128m |\
+	p2w,r619ac |\
 	qcom,ap-dk01.1-c1)
 		caldata_extract "ART" 0x5000 0x2f20
 		;;
@@ -260,7 +270,8 @@ case "$FIRMWARE" in
 		( [ -d "$wlan_data" ] && caldata_sysfsload_from_file "$wlan_data/data_2" 0x0 0x2f20 )
 		;;
 	netgear,ex6100v2 |\
-	netgear,ex6150v2)
+	netgear,ex6150v2 |\
+	netgear,ex6200v2)
 		caldata_extract "ART" 0x5000 0x2f20
 		ath10k_patch_mac $(mtd_get_mac_binary dnidata 0xc)
 		;;
