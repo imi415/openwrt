@@ -293,6 +293,15 @@
 			output-high;
 		};
 	};
+
+	pcie_pins: pcie_pinmux {
+		mux {
+			pins = "gpio2";
+			function = "gpio";
+			bias-pull-down;
+			output-low;
+		};
+	};
 };
 
 &usb3_ss_phy {
@@ -319,4 +328,21 @@
 &wifi1 {
 	status = "okay";
 	qcom,ath10k-calibration-variant = "R619AC";
+};
+
+&pcie0 {
+	status = "okay";
+
+	perst-gpio = <&tlmm 4 GPIO_ACTIVE_LOW>;
+	wake-gpio = <&tlmm 40 GPIO_ACTIVE_HIGH>;
+
+	pinctrl-0 = <&pcie_pins>;
+	pinctrl-names = "default";
+
+	bridge@0,0 {
+		reg = <0x00000000 0 0 0 0>;
+		#address-cells = <3>;
+		#size-cells = <2>;
+		ranges;
+	};
 };
