@@ -5,6 +5,10 @@
 / {
 	model = "P&W R619AC 64M";
 	compatible = "p2w,r619ac-64m";
+
+	chosen {
+		bootargs-append = " ubi.mtd=ubi root=/dev/ubiblock0_1";
+	};
 };
 
 &nand_rootfs {
